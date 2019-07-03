@@ -4,6 +4,21 @@ module.exports.isConnected = false;
 
 var isDeviceConnected = false;
 
+ receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
+        console.log('Received Event: ' + id);
+
+        // register the callback per instructions
+       captuvo.registerScannerCallback(function(barcode){
+           alert("Barcode scanned: " + barcode);
+       });
+    }
 module.exports.registerScannerCallback = function(callback) {
     exec(callback, null, 'CaptuvoCDV', 'registerScannerCallback', [] );
 };
